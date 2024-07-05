@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { BASE_URL } from "./baseUrl";
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +13,19 @@ const Details = () => {
   const [loader, setLoader] = useState(false);
   const { id } = useParams();
 
+  const [screenshotUrl, setScreenshotUrl] = useState('');
+
+  console.log(screenshotUrl, "screenshotUrl")
+  const captureScreenshot = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/screenshot'); // Assuming proxy is set in package.json
+      setScreenshotUrl(response.data.screenshotUrl);
+    } catch (error) {
+      console.error('Error fetching screenshot:', error);
+    }
+  };
+
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,6 +33,7 @@ const Details = () => {
         const response = await axios.get(
           `http://localhost:5000/companies/${id}`
         );
+        console.log(response.data, "response.data")
         setSingleDetails(response.data);
       } catch (error) {
         console.error(error);
@@ -196,17 +211,7 @@ const Details = () => {
                 {singleDetails.linkedinUrl}
               </a>
             </div>
-
-              {/* <div
-                style={{ display: "flex", alignItems: "center", marginTop: 10 }}
-              >
-                <FontAwesomeIcon
-                  icon={faEnvelope}
-                  style={{ marginRight: "10px" }}
-                />
-                <div style={{ fontWeight: "600", color: "#6C7A89" }}>Address</div>
-              </div>
-              <div>United State</div> */}
+       
           </div>
         </Col>
         <Col
@@ -218,7 +223,9 @@ const Details = () => {
           }}
         >
           <div>
+          <h5>Screenshot of webpage</h5>
           
+          <img src="/uploads/screenshot_1720202092690.png" alt="Uploaded Image" style={{ maxWidth: '100px' }} />
           </div>
         </Col>
       </Row>

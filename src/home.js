@@ -212,7 +212,7 @@ const Home = () => {
   return (
     <div className="container">
       <form onSubmit={handleSubmit} className="mt-4">
-        <label>
+        <label style={{ fontFamily: 'Helvetica, sans-serif'}}>
           Enter domain name:
           <Input
             type="text"
@@ -224,18 +224,14 @@ const Home = () => {
         <Button
           type="default"
           htmlType="submit"
+          
           style={{ marginLeft: 10, background: "rgb(161 248 255)" }}
         >
           Fetch & save details
         </Button>
       </form>
 
-      {loading ? (
-        <div className="text-center mt-4">
-          <Spin size="large" />
-        </div>
-      ) : (
-        <>
+    
           <div className="mt-4">
             <button
               type="submit"
@@ -251,10 +247,17 @@ const Home = () => {
               onClick={downloadCSV}
               style={{ marginLeft: 10, background: "rgb(161 248 255)" }}
             >
+             
               Export as CSV
             </button>
           </div>
           <div className="mt-4">
+          {loading ? (
+        <div className="text-center mt-4">
+          <Spin size="large" />
+        </div>
+      ) : (
+        <>
             <Table
               rowSelection={{
                 type: "checkbox",
@@ -265,10 +268,11 @@ const Home = () => {
               rowKey="_id"
               scroll={{ x: "max-content" }}
             />
+                </>
+      )}
           </div>
         
-        </>
-      )}
+    
     </div>
   );
 };

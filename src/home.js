@@ -4,6 +4,7 @@ import { Table, Input, Button, Spin, message, Popconfirm, Modal } from "antd";
 import { saveAs } from "file-saver";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from 'react-router-dom';
+import { BASE_URL } from "./baseUrl";
 const Home = () => {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ const Home = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/scrape", {
+      const response = await axios.post(`${BASE_URL}/scrape`, {
         url,
       });
       fetchCompanies();
@@ -34,7 +35,7 @@ const Home = () => {
 
   const fetchCompanies = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/companies");
+      const response = await axios.get(`${BASE_URL}/companies`);
       setCompanies(response.data);
     } catch (error) {
       console.error(error);
@@ -52,7 +53,7 @@ const Home = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.delete("http://localhost:5000/companies", {
+      const response = await axios.delete(`${BASE_URL}/companies`, {
         data: { ids: selectedRowKeys },
       });
       message.success(response.data.message);
@@ -181,7 +182,7 @@ const Home = () => {
         key: "actions",
         render: (text, record) => (
             <Link to={`/details/${record._id}`}>
-            <Button>View</Button>
+            <Button style={{background:'#e1fbfd'}}>View</Button>
           </Link>
         ),
         width: 100,
@@ -225,7 +226,7 @@ const Home = () => {
           type="default"
           htmlType="submit"
           
-          style={{ marginLeft: 10, background: "rgb(161 248 255)" }}
+          style={{ marginLeft: 10, background: "#e1fbfd" }}
         >
           Fetch & save details
         </Button>
@@ -236,7 +237,7 @@ const Home = () => {
             <button
               type="submit"
               className="btn btn-default btn-sm"
-              style={{ background: "rgb(161 248 255)", marginRight: 10 }}
+              style={{ background: "#e1fbfd", marginRight: 10 }}
               onClick={onDeleteSelected}
             >
               Delete Selected
@@ -245,7 +246,7 @@ const Home = () => {
               type="submit"
               className="btn btn-default btn-sm"
               onClick={downloadCSV}
-              style={{ marginLeft: 10, background: "rgb(161 248 255)" }}
+              style={{ marginLeft: 10, background: "#e1fbfd" }}
             >
              
               Export as CSV

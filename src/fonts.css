@@ -2,7 +2,7 @@
     font-family: 'Helvetica';
     src: url('./fonts/helvetica_condensed.ttf') format('woff2'),
          url('./fonts/Helvetica\ Roman.ttf') format('woff');
-    /* Add other formats if provided */
+   
     font-weight: normal;
     font-style: normal;
   }

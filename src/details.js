@@ -13,17 +13,7 @@ const Details = () => {
   const [loader, setLoader] = useState(false);
   const { id } = useParams();
 
-  const [screenshotUrl, setScreenshotUrl] = useState('');
 
-  console.log(screenshotUrl, "screenshotUrl")
-  const captureScreenshot = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/screenshot'); // Assuming proxy is set in package.json
-      setScreenshotUrl(response.data.screenshotUrl);
-    } catch (error) {
-      console.error('Error fetching screenshot:', error);
-    }
-  };
 
   
   useEffect(() => {
@@ -31,7 +21,7 @@ const Details = () => {
       try {
         setLoader(true);
         const response = await axios.get(
-          `http://localhost:5000/companies/${id}`
+          `${BASE_URL}/companies/${id}`
         );
         console.log(response.data, "response.data")
         setSingleDetails(response.data);
@@ -124,16 +114,7 @@ const Details = () => {
             <div
               style={{ display: "flex", alignItems: "center", marginTop: 10 }}
             >
-              {/* <FontAwesomeIcon
-                icon={faEnvelope}
-                style={{ marginRight: "10px" }}
-              />
-              <div style={{ fontWeight: "600", color: "#6C7A89" }}>Email</div>
-            </div>
-            <div>contact@gmail.com</div>
-            <div
-              style={{ display: "flex", alignItems: "center", marginTop: 10 }}
-            > */}
+            
               <FontAwesomeIcon
                 icon={faFacebook}
                 style={{ marginRight: "10px" }}
@@ -214,20 +195,27 @@ const Details = () => {
        
           </div>
         </Col>
-        <Col
-          md={8}
+        <Col md={8} style={{
+      border: "1px solid #dee2e6",
+      padding: 25,
+      borderRadius: "5px",
+    }}>
+      <div>
+        <h5>Screenshot of webpage</h5>
+        
+        
+        <img 
+          src={`http://localhost:5000/${singleDetails.screenshotUrl}`} 
+          alt="Uploaded Image" 
+          className="img-fluid"
           style={{
-            border: "1px solid #dee2e6",
-            padding: 25,
-            borderRadius: "5px",
+            maxWidth: "100%",
+            height: "auto",
+            borderRadius: "5px"
           }}
-        >
-          <div>
-          <h5>Screenshot of webpage</h5>
-          
-          <img src="/uploads/screenshot_1720202092690.png" alt="Uploaded Image" style={{ maxWidth: '100px' }} />
-          </div>
-        </Col>
+        />
+      </div>
+    </Col>
       </Row>
     </Container>
   );

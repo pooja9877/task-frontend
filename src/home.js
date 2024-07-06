@@ -4,7 +4,7 @@ import { Table, Input, Button, Spin, message, Popconfirm, Modal } from "antd";
 import { saveAs } from "file-saver";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from 'react-router-dom';
-import { BASE_URL } from "./baseUrl";
+import { BASE_URL,BASE_URL1   } from "./baseUrl";
 const Home = () => {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ const Home = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`${BASE_URL}/scrape`, {
+      const response = await axios.post(`${BASE_URL1}/scrape`, {
         url,
       });
       fetchCompanies();

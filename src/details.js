@@ -206,7 +206,7 @@ const Details = () => {
         
         <img 
           src={`http://localhost:5000/${singleDetails.screenshotUrl}`} 
-          alt="Uploaded Image" 
+        
           className="img-fluid"
           style={{
             maxWidth: "100%",

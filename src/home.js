@@ -19,7 +19,7 @@ const Home = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`${BASE_URL1}/scrape`, {
+      const response = await axios.post(`${BASE_URL}/scrape`, {
         url,
       });
       fetchCompanies();
